@@ -1,14 +1,32 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { RouterLink } from '@angular/router'; 
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { RouterLink } from '@angular/router'; // Importa RouterLink
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterLink], // Importa RouterLink
+  imports: [FormsModule, RouterLink], // Agrega FormsModule y RouterLink
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  onSubmit(): void {
+    if (this.password !== this.confirmPassword) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
+
+    // Aquí normalmente harías una solicitud HTTP a tu backend para registrar al usuario
+    // Para este ejemplo, simulamos el registro
+    this.authService.login(this.email, this.password); // Simula el inicio de sesión después del registro
+    this.router.navigate(['/dashboard']); // Redirige al usuario al dashboard
+  }
 }
