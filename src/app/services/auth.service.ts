@@ -26,7 +26,7 @@ export class AuthService {
   // Cierra la sesión
   logout(): void {
     localStorage.removeItem(this.tokenKey); // Elimina el token
-    this.router.navigate(['/login']); // Redirige al usuario
+    this.router.navigate(['/']); // Redirige al Home
   }
 
   // Verifica si el usuario está autenticado
