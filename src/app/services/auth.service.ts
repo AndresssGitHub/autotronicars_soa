@@ -11,8 +11,7 @@ export class AuthService {
 
   // Simula el inicio de sesión
   login(email: string, password: string): void {
-    // Aquí normalmente harías una solicitud HTTP a tu backend
-    // Para este ejemplo, simulamos un token
+    //Solicitud HTTP a tu backend
     const fakeToken = 'fake-jwt-token';
     localStorage.setItem(this.tokenKey, fakeToken); // Almacena el token
     this.router.navigate(['/dashboard']); // Redirige al usuario
@@ -20,9 +19,8 @@ export class AuthService {
 
   // Simula el registro
   register(email: string, password: string): void {
-    // Aquí normalmente harías una solicitud HTTP a tu backend para registrar al usuario
-    // Para este ejemplo, simulamos el registro
-    this.login(email, password); // Simula el inicio de sesión después del registro
+    //Solicitud HTTP a tu backend para registrar al usuario
+    this.login(email, password);
   }
 
   // Cierra la sesión
@@ -36,7 +34,7 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey); // Verifica si hay un token
   }
 
-  // Obtiene el token (útil para enviarlo en las solicitudes HTTP)
+  // Obtiene el token
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }

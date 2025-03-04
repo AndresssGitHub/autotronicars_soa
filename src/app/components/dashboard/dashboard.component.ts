@@ -10,8 +10,7 @@ import { AuthService } from '../../services/auth.service';
   `,
 })
 export class DashboardComponent {
-  authService = inject(AuthService) as AuthService; // Solución para el error de tipo
-
+  authService = inject(AuthService) as AuthService;
   logout(): void {
     this.authService.logout();
   }
