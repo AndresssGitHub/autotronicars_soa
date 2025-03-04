@@ -1,0 +1,66 @@
+/* Fondo degradado */
+.login-container {
+  background: linear-gradient(135deg, #f0f4f8, #d0e0f0);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Onda en la parte inferior */
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-container svg {
+  position: relative;
+  display: block;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 150px;
+}
+
+/* Tarjeta de login */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px; /* Padding interno */
+  z-index: 1; /* Asegura que la tarjeta esté sobre la onda */
+}
+
+/* Estilo para los inputs */
+.form-control {
+  padding: 10px; /* Padding interno */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Estilo para el botón */
+.btn-primary {
+  background-color: #0a5cb8;
+  border: none;
+  padding: 10px; /* Padding interno */
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1a73e8;
+}
+
+/* Estilo para el enlace */
+a {
+  color: #0a5cb8;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #1a73e8;
+}
