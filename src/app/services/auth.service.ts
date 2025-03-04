@@ -1,41 +1,61 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'authToken';
+  constructor(private auth: Auth, private router: Router) {}
 
-  constructor(private router: Router) {}
-
-  // Simula el inicio de sesión
-  login(email: string, password: string): void {
-    //Solicitud HTTP a tu backend
-    const fakeToken = 'fake-jwt-token';
-    localStorage.setItem(this.tokenKey, fakeToken); // Almacena el token
-    this.router.navigate(['/dashboard']); // Redirige al usuario
+  // Iniciar sesión con Firebase
+  async login(email: string, password: string): Promise<void> {
+    try {
+      await signInWithEmailAndPassword(this.auth, email, password);
+      this.router.navigate(['/dashboard']);
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      alert('Credenciales incorrectas');
+    }
   }
 
-  // Simula el registro
-  register(email: string, password: string): void {
-    //Solicitud HTTP a tu backend para registrar al usuario
-    this.login(email, password);
+  // Registrar un nuevo usuario con Firebase
+  async register(email: string, password: string): Promise<void> {
+    try {
+      await createUserWithEmailAndPassword(this.auth, email, password);
+      this.router.navigate(['/dashboard']);
+    } catch (error) {
+      console.error('Error al registrarse:', error);
+      alert('Error al crear la cuenta');
+    }
   }
 
-  // Cierra la sesión
-  logout(): void {
-    localStorage.removeItem(this.tokenKey); // Elimina el token
-    this.router.navigate(['/']); // Redirige al Home
+  // Cerrar sesión con Firebase
+  async logout(): Promise<void> {
+    try {
+      await signOut(this.auth);
+      this.router.navigate(['/']);
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   }
 
-  // Verifica si el usuario está autenticado
+  // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenKey); // Verifica si hay un token
+    return !!this.auth.currentUser;
   }
 
-  // Obtiene el token
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+  // Observador para el estado de autenticación
+  initAuthListener(): void {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        // El usuario está autenticado
+        console.log('Usuario autenticado:', user.email);
+      } else {
+        // El usuario no está autenticado
+        console.log('Usuario no autenticado');
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

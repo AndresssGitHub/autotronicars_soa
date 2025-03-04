@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms'; 
-import { RouterLink } from '@angular/router'; 
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,16 +15,13 @@ export class RegisterComponent {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   onSubmit(): void {
     if (this.password !== this.confirmPassword) {
       alert('Las contraseñas no coinciden');
       return;
     }
-
-    //Solicitud HTTP a tu backend para registrar al usuario
-    this.authService.login(this.email, this.password); 
-    this.router.navigate(['/dashboard']); 
+    this.authService.register(this.email, this.password);
   }
 }
