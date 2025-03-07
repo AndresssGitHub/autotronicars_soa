@@ -11,9 +11,12 @@
         <label for="password" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
       </div>
-      <button type="submit" class="btn btn-danger w-100 mb-3">Iniciar Sesión</button>
+      <button type="submit" class="btn btn-danger w-100 my-4">Iniciar Sesión</button>
       <p class="text-center">
         ¿No tienes una cuenta? <a routerLink="/register" class="text-decoration-none">Regístrate</a>
+      </p>
+      <p class="text-center">
+        <a routerLink="/forgot-password" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
       </p>
     </form>
   </div>
