@@ -9,15 +9,18 @@ export class AuthService {
   constructor(private auth: Auth, private router: Router) {}
 
   // Iniciar sesión con Firebase
-  async login(email: string, password: string): Promise<void> {
+  async login(email: string, password: string): Promise<boolean> {
     try {
-      await signInWithEmailAndPassword(this.auth, email, password);
-      this.router.navigate(['/dashboard']);
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      
+      // Si llega aquí, el login fue exitoso
+      this.router.navigate(['/dashboard']); 
+      return true;
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
-      alert('Credenciales incorrectas');
+      return false; // Devolvemos false si el login falla
     }
-  }
+  }  
 
   // Registrar un nuevo usuario con Firebase
   async register(email: string, password: string): Promise<void> {
@@ -26,9 +29,9 @@ export class AuthService {
       this.router.navigate(['/dashboard']);
     } catch (error) {
       console.error('Error al registrarse:', error);
-      alert('Error al crear la cuenta');
+      throw error; // Importante para que el `catch` en `onRegister()` lo capture
     }
-  }
+  }  
 
   // Cerrar sesión con Firebase
   async logout(): Promise<void> {

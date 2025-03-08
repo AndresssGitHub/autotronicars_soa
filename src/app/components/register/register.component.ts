@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 import { RouterLink } from '@angular/router';
@@ -17,11 +18,36 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService) {}
 
-  onSubmit(): void {
-    if (this.password !== this.confirmPassword) {
-      alert('Las contraseñas no coinciden');
-      return;
+  mostrarError() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error al intentar crear el usuario',
+        confirmButtonColor: '#d33'
+      });
     }
-    this.authService.register(this.email, this.password);
-  }
+  
+    mostrarExito() {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Registro exitoso!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  
+    onRegister(): void {
+      console.log("Intentando registrar...");
+    
+      this.authService.register(this.email, this.password)
+        .then(() => {
+          console.log("Registro exitoso!");
+          this.mostrarExito();
+        })
+        .catch(error => {
+          console.error("Error en el registro:", error);
+          this.mostrarError();
+        });
+    }     
 }
