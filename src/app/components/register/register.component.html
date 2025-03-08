@@ -2,7 +2,7 @@
   style="background-image: url('/images/abstract-background.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; display: flex; justify-content: center; align-items: center;">
   <div class="card register-card shadow-lg">
     <h2 class="card-title text-center mb-4">Registro</h2>
-    <form (ngSubmit)="onRegister">
+    <form (ngSubmit)="onRegister()">
       <div class="mb-3">
         <label for="email" class="form-label">Correo Electrónico</label>
         <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
