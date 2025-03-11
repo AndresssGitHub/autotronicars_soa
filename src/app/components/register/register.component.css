@@ -1,5 +1,5 @@
 /* Fondo degradado */
-.register-container {
+.login-container {
   background: linear-gradient(135deg, #f0f4f8, #d0e0f0);
   min-height: 100vh;
   display: flex;
@@ -27,7 +27,7 @@
 }
 
 /* Tarjeta de registro */
-.register-card {
+.login-card {
   width: 100%;
   max-width: 400px;
   border: none;
@@ -44,21 +44,29 @@
 }
 
 /* Estilo para el botón */
-.btn-primary {
-  background-color: #0a5cb8;
+.btn-danger {
+  background-color: #dc3545;
   border: none;
   padding: 10px; /* Padding interno */
   transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
-  background-color: #1a73e8;
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 5px;
 }
 
 /* Estilo para el enlace */
 a {
   color: #0a5cb8;
   font-weight: bold;
+  cursor: pointer;
 }
 
 a:hover {
